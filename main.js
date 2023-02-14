@@ -1,38 +1,39 @@
 const tweeter = Tweeter()
 const renderer = Renderer()
 
-renderer.renderPosts(tweeter.getPosts())
+const renderSite = () => renderer.renderPosts(tweeter.getPosts())
+renderSite()
 
 $('#post').on('click' , function(){
 
     let postText = $('#input').val();
     tweeter.addPost(postText);
 
-    renderer.renderPosts(tweeter.getPosts())
+    renderSite()
 })
 
 $('body').on('click' ,'.delete-post' ,function(){
 
-    let postId = $(this).closest('.post').attr('id')
+    let postId = $(this).closest('.post').data().id
     tweeter.removePost(postId)
 
-    renderer.renderPosts(tweeter.getPosts())
+    renderSite()
 })
 
 $('body').on('click' ,'.add-comment' ,function(){
 
-    let postId = $(this).closest('.post').attr('id')
+    let postId = $(this).closest('.post').data().id
     let postText = $(this).siblings('.comment-input').val();
     tweeter.addComment(postText , postId)
 
-    renderer.renderPosts(tweeter.getPosts())
+    renderSite()
 })
 
 $('body').on('click' ,'.delete-comment' ,function(){
 
-    let postId = $(this).closest('.post').attr('id')
-    let commentId = $(this).closest('.comments').attr('id')
+    let postId = $(this).closest('.post').data().id
+    let commentId = $(this).closest('.comments').data().id
     tweeter.removeComment(postId , commentId)
 
-    renderer.renderPosts(tweeter.getPosts())
+    renderSite()
 })

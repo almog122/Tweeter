@@ -68,17 +68,13 @@ body{
     padding: 5px;
     border-radius: 3px;
     font-size: 0.8em;
+    margin-top: 10px;
 }
 
 .delete-comment{
     cursor: pointer;
     color: #e74c3c;
-    color: #ecf0f1;
-    background-color: #e74c3c;
-    display: inline-block;
-    padding: 1px;
-    border-radius: 3px;
-    font-size: 0.8em;
+    bottom: 0px;
 
 }
 

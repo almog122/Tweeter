@@ -1,9 +1,9 @@
 const Tweeter = function () {
-  let postIdCounter = 3;
+  let _postIdCounter = 3;
 
-  let commentIdCounter = 7;
+  let _commentIdCounter = 7;
 
-  let posts = [
+  const _posts = [ //Add new mock Data file ! also we can add a function to add the counters
     {
       text: "First post!",
       id: "p1",
@@ -26,61 +26,78 @@ const Tweeter = function () {
       ],
     },
   ];
+ 
+  const getPosts = () => _posts;
 
-  //getters
-  getPosts = () => posts;
-
-  //adders
-  addPost = function (text) {
-    let newPost = [];
-    let newPostId = `p${postIdCounter}`;
-    postIdCounter++;
-
-    newPost["text"] = text;
-    newPost["id"] = newPostId;
-    newPost["comments"] = [];
-
-    posts.push(newPost);
-  };
-
-  addComment = function (text, postID) {
-    let newComment = [];
-    let newCommentId = `c${commentIdCounter}`;
-    commentIdCounter++;
-
-    newComment["id"] = newCommentId;
-    newComment["text"] = text;
-
-    for (let post of posts) {
-      if (post.id === postID) {
-        post.comments.push(newComment);
-      }
-    }
-  };
-
-  //removers
-  removePost = function (postID) {
-    for (let postIndex in posts) {
-      let currentPost = posts[postIndex];
+  const findPostIndex = function (postID) {
+    for (let postIndex in _posts) {
+      let currentPost = _posts[postIndex];
 
       if (currentPost.id === postID) {
-        posts.splice(postIndex, 1);
+        return postIndex;
       }
     }
+
+    return -1;
   };
 
-  removeComment = function (postID, commentID) {
-    for (let postIndex in posts) {
-      let currentPost = posts[postIndex];
+  const isTextEmpty = function(text){
+    if(text == ""){
+      return true
+    }
+    return false
+  }
 
-      if (currentPost.id === postID) {
-        for (let commentIndex in currentPost.comments) {
-          let currentComment = currentPost.comments[commentIndex];
+  const addPost = function (text) {
 
-          if (currentComment.id === commentID) {
-            currentPost.comments.splice(commentIndex, 1);
-          }
-        }
+    if(isTextEmpty(text)){
+      return
+    }
+
+    let newPost = {
+      text: text,
+      id: `p${_postIdCounter++}`,
+      comments: []
+    };
+
+    _posts.push(newPost);
+  };
+
+  const addComment = function (text, postID) {
+    
+    if(isTextEmpty(text)){
+      return
+    }
+
+    let newComment = {
+      id: `c${_commentIdCounter}`,
+      text : text
+
+    };
+    
+    let postIndex = findPostIndex(postID);
+    
+    _posts[postIndex].comments.push(newComment);
+  }
+  
+
+
+
+  const removePost = function (postID) {
+    let postIndex = findPostIndex(postID);
+
+    _posts.splice(postIndex, 1);
+  };
+
+  const removeComment = function (postID, commentID) {
+
+    let postIndex = findPostIndex(postID);
+
+    for (let commentIndex in _posts[postIndex].comments) { //add a test for -1
+      let currentComment = _posts[postIndex].comments[commentIndex];
+
+      if (currentComment.id === commentID) {
+        _posts[postIndex].comments.splice(commentIndex, 1);
       }
     }
   };
@@ -93,5 +110,3 @@ const Tweeter = function () {
     removeComment: removeComment,
   };
 };
-
-// const tweeter = Tweeter();
