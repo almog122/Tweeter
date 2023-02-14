@@ -80,9 +80,6 @@ const Tweeter = function () {
     _posts[postIndex].comments.push(newComment);
   }
   
-
-
-
   const removePost = function (postID) {
     let postIndex = findPostIndex(postID);
 
@@ -103,10 +100,10 @@ const Tweeter = function () {
   };
 
   return {
-    getPosts: getPosts,
-    addPost: addPost,
-    removePost: removePost,
-    addComment: addComment,
-    removeComment: removeComment,
+    getPosts,
+    addPost,
+    removePost,
+    addComment,
+    removeComment,
   };
 };

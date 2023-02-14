@@ -8,6 +8,7 @@ $('#post').on('click' , function(){
 
     let postText = $('#input').val();
     tweeter.addPost(postText);
+    $('#input').val("");
 
     renderSite()
 })
