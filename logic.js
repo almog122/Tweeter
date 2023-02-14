@@ -41,11 +41,8 @@ const Tweeter = function () {
     return -1;
   };
 
-  const isTextEmpty = function(text){
-    if(text == ""){
-      return true
-    }
-    return false
+  const isTextEmpty = function(text){  
+    return (text == "")
   }
 
   const addPost = function (text) {
@@ -70,9 +67,8 @@ const Tweeter = function () {
     }
 
     let newComment = {
-      id: `c${_commentIdCounter}`,
+      id: `c${_commentIdCounter++}`,
       text : text
-
     };
     
     let postIndex = findPostIndex(postID);
