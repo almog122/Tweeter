@@ -1,7 +1,7 @@
 const tweeter = Tweeter()
 const renderer = Renderer()
 
-const renderSite = () => renderer.renderPosts(tweeter.getPosts())
+const renderSite = () => renderer(tweeter.getPosts())
 renderSite()
 
 $('#post').on('click' , function(){

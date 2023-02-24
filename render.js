@@ -15,8 +15,8 @@ const Renderer = function () {
             postIdContainer.append(`<h1 class=post-text> ${post.text} </h1>`)
             
             for(let comment of post.comments){
-                postIdContainer.append(`<div data-id="${comment.id}" class=comments > ${comment.text} </div>`)
-                $(`[data-id=${comment.id}]`).append(`<div class=delete-comment> X </div>`)
+                postIdContainer.append(`
+                <div data-id="${comment.id}" class=comments ><span class=delete-comment> X </span> ${comment.text} </div>`)
             }
 
             postIdContainer.append(`<input placeholder="Got somthing to say?" class=comment-input type=text>`)
@@ -24,7 +24,5 @@ const Renderer = function () {
         }
     }
 
-    return{
-        renderPosts : renderPosts 
-    };
+    return renderPosts 
 }
